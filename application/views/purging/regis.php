@@ -36,6 +36,7 @@
                         <div class="col-lg-4">
                             <label>Shift</label>
                             <select name="shift" class="form-control">
+                                <option>- -</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -46,22 +47,16 @@
                         <div class="col-lg-4">
                             <label>Machine</label>
                             <select name="no_mc" class="form-control">
-                                <option value="A1">A1</option>
-                                <option value="A2">A2</option>
-                                <option value="A3">A3</option>
-                                <option value="A4">A4</option>
-                                <option value="A5">A5</option>
-                                <option value="A6">A6</option>
-                                <option value="A7">A7</option>
-                                <option value="A8">A8</option>
-                                <option value="A9">A9</option>
-                                <option value="A10">A10</option>
-                                <option value="A11">A11</option>
+                                <option>- -</option>
+                                <?php foreach ($mesin->result() as $key => $ms) : ?>
+                                    <option value="<?= $ms->nama_mesin ?>"><?= $ms->nama_mesin ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-lg-4">
                             <label>Code Type</label>
                             <select name="c_awal" class="form-control">
+                                <option>- -</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
@@ -71,23 +66,26 @@
                         </div>
                         <div class="col-lg-4">
                             <label>Part name</label>
-                            <select name="name_pn" class="form-control">
-                                <option value="BACK COVER">BACK COVER</option>
-                                <option value="BASE ASSEMBLY, STAND">BASE ASSEMBLY, STAND</option>
-                                <option value="BASE ASSY, STAND 2 POLE">BASE ASSY, STAND 2 POLE</option>
-                                <option value="BASE COVER">BASE COVER</option>
-                                <option value="BASE COVER STAND">BASE COVER STAND</option>
+                            <select name="name_pn" id="name_pn" class="form-control">
+                                <option>- -</option>
+                                <?php foreach ($part as $p): ?>
+                                    <option value="<?= $p->name_pn ?>"><?= $p->name_pn ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-4">
                             <label>Model</label>
-                            <input type="text" name="name_model" class="form-control">
+                            <select name="name_model" id="name_model" class="form-control">
+                                <option>- -</option>
+                            </select>
                         </div>
                         <div class="col-lg-4">
                             <label>Part Number</label>
-                            <input type="text" name="no_pn" class="form-control">
+                            <select name="no_pn" id="no_pn" class="form-control">
+                                <option>- -</option>
+                            </select>
                         </div>
                         <div class="col-lg-4">
                             <label>Resin</label>
@@ -166,6 +164,60 @@
 
             purging.addEventListener("input", hitungTotal);
             disposal.addEventListener("input", hitungTotal);
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $('#name_pn').change(function() {
+                let name_pn = $(this).val();
+                $('#name_model').html('<option>- -</option>');
+                $('#no_pn').html('<option>- -</option>');
+
+                if (name_pn) {
+                    $.ajax({
+                        url: "<?= site_url('purging/get_model') ?>",
+                        type: "POST",
+                        data: {
+                            name_pn: name_pn
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            $.each(data, function(i, item) {
+                                $('#name_model').append(
+                                    '<option value="' + item.name_model + '">' + item.name_model + '</option>'
+                                );
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#name_model').change(function() {
+                let name_model = $(this).val();
+                let name_pn = $('#name_pn').val();
+                $('#no_pn').html('<option>- -</option>');
+
+                if (name_model) {
+                    $.ajax({
+                        url: "<?= site_url('purging/get_part_number') ?>",
+                        type: "POST",
+                        data: {
+                            name_pn: name_pn,
+                            name_model: name_model
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            $.each(data, function(i, item) {
+                                $('#no_pn').append(
+                                    '<option value="' + item.no_pn + '">' + item.no_pn + '</option>'
+                                );
+                            });
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 </section>

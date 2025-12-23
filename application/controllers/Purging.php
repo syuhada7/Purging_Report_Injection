@@ -20,6 +20,8 @@ class Purging extends CI_Controller
     public function regis()
     {
         $data['next_id'] = $this->Purging_model->get_next_id();
+        $data['mesin'] = $this->Purging_model->get_mesin();
+        $data['part'] = $this->Purging_model->get_part_name();
         $this->template->load('templates/template', 'purging/regis', $data);
     }
 
@@ -79,5 +81,24 @@ class Purging extends CI_Controller
 
         $this->Purging_model->insert($data);
         redirect('Purging');
+    }
+
+    // get data part
+    public function get_model()
+    {
+        $part_name = $this->input->post('name_pn');
+        echo json_encode(
+            $this->Purging_model->get_model_by_part($part_name)
+        );
+    }
+
+    public function get_part_number()
+    {
+        $part_name = $this->input->post('name_pn');
+        $model     = $this->input->post('name_model');
+
+        echo json_encode(
+            $this->Purging_model->get_pn_by_part_model($part_name, $model)
+        );
     }
 }
