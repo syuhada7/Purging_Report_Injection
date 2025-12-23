@@ -36,6 +36,7 @@
                     <th>Wieght Disposal</th>
                     <th>Qty</th>
                     <th>Summary Weight</th>
+                    <th>Note</th>
                     <th>View Picture</th>
                 </thead>
                 <tbody>
@@ -58,6 +59,7 @@
                             <td><?= $data->b_disposal ?></td>
                             <td><?= $data->qty_b_dis ?></td>
                             <td><?= $data->jumlah_kg ?></td>
+                            <td><?= $data->keterangan ?></td>
                             <td><a href="<?= site_url('purging/view/' . $data->id_catat) ?>"><i class="fa fa-eye"></i></a></td>
                         </tr>
                     <?php endforeach; ?>

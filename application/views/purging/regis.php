@@ -103,13 +103,13 @@
                         </div>
                         <div class="col-lg-4">
                             <label>Weight Purging</label>
-                            <input type="number" name="b_purging" id="b_purging" class="form-control">
+                            <input type="number" name="b_purging" id="b_purging" step="0.01" min="0" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-4">
                             <label>Weight Disposal</label>
-                            <input type="number" name="b_disposal" id="b_disposal" class="form-control">
+                            <input type="number" name="b_disposal" id="b_disposal" step="0.01" min="0" class="form-control">
                         </div>
                         <div class="col-lg-4">
                             <label>Qty</label>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-lg-4">
                             <label>Summary Wieght</label>
-                            <input type="number" name="jumlah_kg" id="jumlah_kg" class="form-control" readonly>
+                            <input type="number" name="jumlah_kg" id="jumlah_kg" step="0.01" min="0" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group">
