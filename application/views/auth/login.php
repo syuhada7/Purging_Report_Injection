@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </form>
-            <!-- <a href="<?= site_url('Public_purging') ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> View</a> -->
+            <a href="<?= site_url('Public_purging') ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> View</a>
         </div>
         <!-- /.login-box-body -->
     </div>

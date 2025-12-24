@@ -6,12 +6,25 @@ class Public_purging extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // $this->load->model(['Eco_model', 'User_model', 'Delivery_model']);
+        $this->load->library('form_validation', 'upload');
+        $this->load->model(['Purging_model', 'User_model']);
     }
+
 
     public function index()
     {
-        // $data['row'] = $this->Eco_model->get();
-        $this->template->load('templates/template_public', 'Public_purging/index');
+        $this->template->load('templates/template_public', 'Public_purging/dashboard');
+    }
+
+    public function purging()
+    {
+        $data['row'] = $this->Purging_model->get();
+        $this->template->load('templates/template_public', 'Public_purging/index', $data);
+    }
+
+    public function view($id)
+    {
+        $data['row'] = $this->Purging_model->get($id);
+        $this->template->load('templates/template_public', 'Public_purging/view', $data);
     }
 }

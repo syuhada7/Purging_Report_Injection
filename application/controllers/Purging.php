@@ -101,4 +101,92 @@ class Purging extends CI_Controller
             $this->Purging_model->get_pn_by_part_model($part_name, $model)
         );
     }
+
+    // edit data
+    public function edit($id)
+    {
+        $query = $this->Purging_model->get($id);
+        if ($query->num_rows() > 0) {
+            $data['row']   = $query->row();
+            $data['mesin'] = $this->Purging_model->get_mesin();
+            $data['part'] = $this->Purging_model->get_part_name();
+            $this->template->load('templates/template', 'purging/edit', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');window.location='" . site_url('purging') . "';</script>";
+        }
+    }
+
+    public function update()
+    {
+        $post = $this->input->post(null, TRUE);
+        $id   = $post['id_catat'];
+
+        // ambil data lama
+        $old = $this->Purging_model->get($id)->row();
+
+        $config = [
+            'upload_path'   => './uploads/purging/',
+            'allowed_types' => 'jpeg|jpg|png',
+            'max_size'      => 8192 // 4MB
+        ];
+
+        $this->load->library('upload', $config);
+
+        /* =============================
+       ATTACHMENT 1 (PURGING)
+    ============================== */
+        if (!empty($_FILES['attachment1']['name'])) {
+
+            if ($this->upload->do_upload('attachment1')) {
+
+                // HAPUS FILE LAMA (hanya jika upload baru sukses)
+                if (
+                    !empty($old->pic_1) &&
+                    file_exists('./uploads/purging/' . $old->pic_1)
+                ) {
+                    unlink('./uploads/purging/' . $old->pic_1);
+                }
+
+                // SIMPAN FILE BARU
+                $post['attachment1'] = $this->upload->data('file_name');
+            } else {
+                echo "<script>alert('" . $this->upload->display_errors() . "');history.back();</script>";
+                return;
+            }
+        } else {
+            // TIDAK UPLOAD → TETAP PAKAI FILE LAMA
+            $post['attachment1'] = $old->pic_1;
+        }
+
+        /* =============================
+       ATTACHMENT 2 (DISPOSAL)
+    ============================== */
+        if (!empty($_FILES['attachment2']['name'])) {
+
+            if ($this->upload->do_upload('attachment2')) {
+
+                if (
+                    !empty($old->pic_2) &&
+                    file_exists('./uploads/purging/' . $old->pic_2)
+                ) {
+                    unlink('./uploads/purging/' . $old->pic_2);
+                }
+
+                $post['attachment2'] = $this->upload->data('file_name');
+            } else {
+                echo "<script>alert('" . $this->upload->display_errors() . "');history.back();</script>";
+                return;
+            }
+        } else {
+            $post['attachment2'] = $old->pic_2;
+        }
+
+        // UPDATE DATABASE
+        $this->Purging_model->update($post);
+
+        echo "<script>
+        alert('Data berhasil diupdate');
+        window.location='" . site_url('purging') . "';
+    </script>";
+    }
 }

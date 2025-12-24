@@ -101,49 +101,15 @@
               <a href="<?= base_url('User') ?>">
                 <i class="fa fa-users"></i> <span> User Data</span></a>
             </li>
-            <li class="header">ECO Management</li>
+            <li class="header">Purging Management</li>
             <li <?= $this->uri->segment(1) == 'Purging' ? 'class="active"' : '' ?>>
               <a href="<?= base_url('Purging') ?>">
                 <i class="fa fa-cubes"></i> <span>Purging Data</span>
               </a>
             </li>
-            <!-- <li <?= $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-              <a href="<?= base_url('eco/status_report') ?>">
-                <i class="fa fa-list"></i> <span>ECO Status Report</span>
-              </a>
-            </li> -->
-            <!-- <li class="treeview menu-open">
-              <a href="">
-                <i class="fa fa-cubes"></i> <span>Item Management</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                <ul class="treeview-menu">
-                  <li <?= $this->uri->segment(1) == '' ? 'class="active"' : '' ?>><a href="<?= base_url('#') ?>"><i class="fa fa-circle-o"></i> Finish Good</a></li>
-                  <li <?= $this->uri->segment(1) == '' ? 'class="active"' : '' ?>><a href="<?= base_url('#') ?>"><i class="fa fa-circle-o"></i> Sub Materials</a></li>
-                </ul>
-              </a>
-            </li>
-            <li <?= $this->uri->segment(1) == 'User' ? 'class="active"' : '' ?>>
-              <a href="<?= base_url('Bom') ?>">
-                <i class="fa fa-list"></i> <span> BOM</span></a>
-            </li>
-            <li class="header">APPROVAL DATA</li>
-            <li class="treeview menu-open">
-              <a href="">
-                <i class="fa fa-exchange"></i> <span>List Approval</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                <ul class="treeview-menu">
-                  <li <?= $this->uri->segment(1) == '' ? 'class="active"' : '' ?>><a href="<?= base_url('#') ?>"><i class="fa fa-circle-o"></i> Bill Off Materials</a></li>
-                  <li <?= $this->uri->segment(1) == '' ? 'class="active"' : '' ?>><a href="<?= base_url('#') ?>"><i class="fa fa-circle-o"></i> Cost Table</a></li>
-                </ul>
-              </a>
-            </li> -->
           <?php } ?>
 
-          <!-- Manager -->
+          <!-- User -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <?php if ($this->session->userdata('level') == 2) { ?>
             <ul class="sidebar-menu" data-widget="tree">
@@ -153,46 +119,18 @@
                   <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
               </li>
-              <li class="header">MASTER DATA</li>
-              <li <?= $this->uri->segment(1) == 'User' ? 'class="active"' : '' ?>>
-                <a href="<?= base_url('User') ?>">
-                  <i class="fa fa-users"></i> <span> User Data</span></a>
+              <li class="header">Purging Management</li>
+              <li <?= $this->uri->segment(1) == 'Purging' ? 'class="active"' : '' ?>>
+                <a href="<?= base_url('Purging') ?>">
+                  <i class="fa fa-cubes"></i> <span>Purging Data</span>
+                </a>
               </li>
             <?php } ?>
+            <!-- \\User -->
 
-            <!-- SPV -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <?php if ($this->session->userdata('level') == 3) { ?>
-              <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li <?= $this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-                  <a href="<?= base_url('dashboard'); ?>">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                  </a>
-                </li>
-                <li class="header">MASTER DATA</li>
-                <li <?= $this->uri->segment(1) == 'User' ? 'class="active"' : '' ?>>
-                  <a href="<?= base_url('User') ?>">
-                    <i class="fa fa-users"></i> <span> User Data</span></a>
-                </li>
-              <?php } ?>
-
-              <!-- User -->
-              <!-- sidebar menu: : style can be found in sidebar.less -->
-              <?php if ($this->session->userdata('level') == 4) { ?>
-                <ul class="sidebar-menu" data-widget="tree">
-                  <li class="header">MAIN NAVIGATION</li>
-                  <li <?= $this->uri->segment(4) == 'dashboard' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-                    <a href="<?= base_url('dashboard'); ?>">
-                      <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                  </li>
-                <?php } ?>
-                <!-- \\User -->
-
-                <li class="header">USER</li>
-                <li><a href="<?= site_url('Auth/logout') ?>"><i class="fa fa-caret-square-o-right text-red"></i> <span>Logout</span></a></li>
-                </ul>
+            <li class="header">USER</li>
+            <li><a href="<?= site_url('Auth/logout') ?>"><i class="fa fa-caret-square-o-right text-red"></i> <span>Logout</span></a></li>
+            </ul>
       </section>
       <!-- /.sidebar -->
     </aside>

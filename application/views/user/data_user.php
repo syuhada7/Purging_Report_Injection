@@ -102,9 +102,7 @@
               <select name="level" class="form-control">
                 <option>--</option>
                 <option value="1">Administrator</option>
-                <option value="2">Manager</option>
-                <option value="3">SPV/Leader</option>
-                <option value="4">User</option>
+                <option value="2">User</option>
               </select>
               <?= form_error('level', '<small class="text-danger pl-3">', '</small>'); ?>
             </div>

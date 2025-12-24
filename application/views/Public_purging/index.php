@@ -1,9 +1,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1><i class="fa fa-cubes"></i> ECO Data List</h1>
+    <h1><i class="fa fa-cubes"></i> Purging Data List</h1>
     <ol class="breadcrumb">
-        <li><a href="<?= base_url('eco_public'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">ECO Data List</li>
+        <li><a href="<?= base_url('Public_purging'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Purging Data List</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -11,100 +11,55 @@
     <div class="box">
         <div class="box-header">
             <i class="fa fa-cubes"></i>
-            <h3 class="box-title">List Data ECO</h3>
+            <h3 class="box-title">List Data Purging</h3>
             <div class="pull-right">
-
+                <div class="btn-group">
+                </div>
             </div>
         </div>
         <div class="box-body table-responsive">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                    <th>No</th>
-                    <th>Departement</th>
                     <th>Registrations Date</th>
-                    <th>Meeting Report</th>
+                    <th>Registrations Name</th>
+                    <th>Shift</th>
+                    <th>Machine</th>
+                    <th>Code Type</th>
+                    <th>Part Name</th>
                     <th>Model</th>
-                    <th>P/N Name</th>
-                    <th>IN ECO</th>
-                    <th>KR ECO</th>
-                    <th>Registrant</th>
-                    <th>Effective Date</th>
-                    <th>How to Apply</th>
-                    <th>Final Status</th>
-                    <th>First Release Date</th>
-                    <th>Drawing P/N</th>
-                    <th>Related Materials</th>
-                    <th>Last Stock</th>
-                    <th>Views Approval</th>
+                    <th>Part Number</th>
+                    <th>Resin</th>
+                    <th>Before Change</th>
+                    <th>After Change</th>
+                    <th>Weight Purging</th>
+                    <th>Wieght Disposal</th>
+                    <th>Qty</th>
+                    <th>Summary Weight</th>
+                    <th>Note</th>
+                    <th>View Picture</th>
                 </thead>
                 <tbody>
                     <?php
-                    $no = 1;
                     foreach ($row->result() as $key => $data) :
                     ?>
-                        <tr>
-                            <td><?= $no++; ?></td>
-                            <td><?= $data->dept ?></td>
-                            <td><?= $data->regis_date ?></td>
-                            <td><a href="<?= site_url('eco_public/meeting/' . $data->id_eco) ?>"><?= $data->status1 ?></a></td>
-                            <td><?= $data->model_pn ?></td>
-                            <td style="background-color: <?= empty($data->pn_name) ? 'red' : '' ?>">
-                                <?= !empty($data->pn_name) ? $data->pn_name : '' ?>
-                            </td>
-                            <td style="background-color: 
-                                <?=
-                                (empty($data->in_eco_num) && empty($data->in_eco_path)) ? 'red' : ((empty($data->in_eco_num) || empty($data->in_eco_path)) ? 'yellow' : 'transparent')
-                                ?>">
-                                <?= !empty($data->in_eco_path)
-                                    ? '<a href="' . site_url('uploads/eco_file/' . rawurlencode($data->in_eco_path)) . '" target="_blank">' . ($data->in_eco_num ?: "—") . '</a>'
-                                    : ($data->in_eco_num ?: "—")
-                                ?>
-                            </td>
-                            <td style="background-color: 
-                                <?=
-                                (empty($data->kr_eco_num) && empty($data->kr_eco_path)) ? 'red' : ((empty($data->kr_eco_num) || empty($data->kr_eco_path)) ? 'yellow' : 'transparent')
-                                ?>">
-                                <?= !empty($data->kr_eco_path)
-                                    ? '<a href="' . site_url('uploads/eco_file/' . rawurlencode($data->kr_eco_path)) . '" target="_blank">' . ($data->kr_eco_num ?: "—") . '</a>'
-                                    : ($data->kr_eco_num ?: "—")
-                                ?>
-                            </td>
-                            <td><?= $data->register ?></td>
-                            <td style="background-color:
-                                <?php
-                                $diff = (strtotime($data->effec_date) - time()) / 86400;
-                                echo ($diff < 0) ? 'red' : (($diff <= 10) ? 'yellow' : '');
-                                ?>">
-                                <?= $data->effec_date ?>
-                            </td>
-                            <td><?= $data->h_apply ?></td>
-                            <td><?= $data->status2 ?></td>
-                            <td><a href="<?= site_url('eco_public/inspection/' . $data->id_eco) ?>"><?= $data->first_release_date  ?></a></td>
-                            <td><a href="<?= site_url('uploads/eco_file/' . rawurlencode($data->dwg_path)) ?>" target="_blank"><?= $data->dwg_pn ?></a></td>
-                            <td><a href="<?= site_url('eco_public/v_list/' . $data->id_eco . '/' . $data->rm); ?>"><?= $data->rm ?></a></td>
-                            <td><?= $data->last_stock ?></td>
-                            <?php
-                            $approvals = [
-                                $data->aproval1,
-                                $data->aproval2,
-                                $data->aproval3,
-                                $data->aproval4,
-                                $data->aproval5,
-                                $data->aproval6,
-                                $data->aproval7
-                            ];
-
-                            // Jika ada salah satu yang kosong → beri warna merah
-                            $incomplete = in_array(null, $approvals, true) || in_array('', $approvals, true);
-
-                            // Buat URL link
-                            $link = site_url('eco_public/approval/' . $data->id_eco);
-                            ?>
-                            <td style="background-color: <?= $incomplete ? 'red' : '' ?>">
-                                <a href="<?= $link ?>">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </td>
+                        <tr class="text-center">
+                            <td><?= $data->date_created ?></td>
+                            <td><?= $data->username ?></td>
+                            <td><?= $data->shift ?></td>
+                            <td><?= $data->no_mc ?></td>
+                            <td><?= $data->c_awal ?></td>
+                            <td><?= $data->name_pn ?></td>
+                            <td><?= $data->name_model ?></td>
+                            <td><?= $data->no_pn ?></td>
+                            <td><?= $data->name_resin ?></td>
+                            <td><?= $data->bf_ganti ?></td>
+                            <td><?= $data->af_ganti ?></td>
+                            <td><?= $data->b_purging ?></td>
+                            <td><?= $data->b_disposal ?></td>
+                            <td><?= $data->qty_b_dis ?></td>
+                            <td><?= $data->jumlah_kg ?></td>
+                            <td><?= $data->keterangan ?></td>
+                            <td><a href="<?= site_url('Public_purging/view/' . $data->id_catat) ?>"><i class="fa fa-eye"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -112,4 +67,3 @@
         </div>
     </div>
 </section>
-<!-- /.content -->

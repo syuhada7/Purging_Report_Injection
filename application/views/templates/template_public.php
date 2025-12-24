@@ -40,7 +40,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="<?= base_url('Dashboard') ?>" class="logo">
+      <a href="<?= base_url('Public_purging') ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>PRS</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -71,7 +71,7 @@
             <img src="<?= base_url() ?>uploads/logo/logo.png" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <a href="<?= base_url('dashboard'); ?>">
+            <a href="<?= base_url('Public_purging'); ?>">
             </a>
           </div>
         </div>
@@ -79,8 +79,13 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
-          <li <?= $this->uri->segment(1) == 'Public_purging' ? 'class="active"' : '' ?>>
-            <a href="<?= base_url('Public_purging') ?>">
+          <li <?= $this->uri->segment(1) == 'Public_purging' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+            <a href="<?= base_url('Public_purging'); ?>">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+          </li>
+          <li <?= $this->uri->segment(1) == 'Purging' ? 'class="active"' : '' ?>>
+            <a href="<?= base_url('Public_purging/purging') ?>">
               <i class="fa fa-cubes"></i> <span>Purging Data</span>
             </a>
           </li>

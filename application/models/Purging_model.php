@@ -61,4 +61,30 @@ class Purging_model extends CI_Model
     {
         return $this->db->insert($this->table, $data);
     }
+
+    public function update($post)
+    {
+        $params = [
+            'shift'           => $post['shift'],
+            'username'        => $post['username'],
+            'no_mc'           => $post['no_mc'],
+            'c_awal'          => $post['c_awal'],
+            'name_pn'         => $post['name_pn'],
+            'no_pn'           => $post['no_pn'],
+            'name_model'      => $post['name_model'],
+            'name_resin'      => $post['name_resin'],
+            'bf_ganti'        => $post['bf_ganti'],
+            'af_ganti'        => $post['af_ganti'],
+            'b_purging'       => $post['b_purging'],
+            'b_disposal'      => $post['b_disposal'],
+            'qty_b_dis'       => $post['qty_b_dis'],
+            'jumlah_kg'       => $post['jumlah_kg'],
+            'keterangan'      => $post['keterangan'],
+            'pic_1'           => $post['attachment1'],
+            'pic_2'           => $post['attachment2'],
+        ];
+
+        $this->db->where('id_catat', $post['id_catat']);
+        $this->db->update('Catatan', $params);
+    }
 }

@@ -21,6 +21,9 @@
         <div class="box-body table-responsive">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
+                    <?php if ($this->session->userdata('level') == 1): ?>
+                        <th></th>
+                    <?php endif; ?>
                     <th>Registrations Date</th>
                     <th>Registrations Name</th>
                     <th>Shift</th>
@@ -44,6 +47,13 @@
                     foreach ($row->result() as $key => $data) :
                     ?>
                         <tr class="text-center">
+                            <?php if ($this->session->userdata('level') == 1): ?>
+                                <td>
+                                    <a href="<?= site_url('purging/edit/' . $data->id_catat) ?>">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            <?php endif; ?>
                             <td><?= $data->date_created ?></td>
                             <td><?= $data->username ?></td>
                             <td><?= $data->shift ?></td>
